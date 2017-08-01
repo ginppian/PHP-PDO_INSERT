@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Sign Up</title>
+    <link rel="stylesheet" href="node_modules\bootstrap\dist\css\bootstrap.min.css">
+    <link rel="stylesheet" href="signup.css">
+</head>
+<body>
+    <div class="container container-table">
+        <div class="row vertical-center-row">
+            <div class="col-md-4 col-md-offset-4">
+                <form class="" action="signup.php">
+
+                    <div class="form-group">
+                        <label  for="nombre">Nombre(s):</label><br>
+                        <input class="form-control" type="text" id="nombre" placeholder="José Juan"><br>
+                    </div>
+
+                    <div class="form-group">
+                        <label  for="paterno">Apellido Paterno:</label><br>
+                        <input class="form-control" type="text" id="paterno" placeholder="Pérez"><br>
+                    </div>
+
+                    <div class="form-group">
+                        <label  for="materno">Apellido Materno:</label><br>
+                        <input class="form-control" type="text" id="materno" placeholder="López"><br>
+                    </div>
+
+                    <div class="form-group">
+                        <label  for="correo">Correo:</label><br>
+                        <input class="form-control" type="email" id="correo" placeholder="juan.perez@gmail.com"><br>
+                    </div>
+
+                    <div class="form-group">
+                        <label  for="password">Password:</label><br>
+                        <input class="form-control" type="password" id="password"><br>
+                    </div>
+
+                    <div class="form-group">
+                        <label  for="verifyPassword">Verify Password:</label><br>
+                        <input class="form-control" type="password" id="verifyPassword"><br>
+                    </div>
+
+                    <div class="form-group">
+                        <button type="button" class="btn btn-success btn-block" id="button">Agregar</button>
+                    </div>
+
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <script src="./node_modules/jquery/dist/jquery.min.js"></script>
+    <script src="node_modules\bootstrap\dist\js\bootstrap.min.js"></script>
+    <script src="signup.js"></script>
+</body>
+</html>
