@@ -18,28 +18,41 @@ if ($_POST["obj"]) {
     $obj = json_decode($_POST["obj"]);
     //echo $obj->nombre;
 
-    // Hasheamos la password
-    $newPass = password_hash($obj->password, PASSWORD_DEFAULT, ['cost' => 13]);
-    //echo $newPass;
-
-    // Creamos consulta
-    $user = $pdo->prepare("INSERT INTO `asesor` (`ID_ASESOR`, `NOMBRE`, `PATERNO`, `MATERNO`, `CORREO`, `PASSWORD`) VALUES (NULL, :nombre, :paterno, :materno, :correo, :password)");
-
-    // Llenamos campos y ejecutamos
-    $response = $user->execute([
-                    'nombre' => $obj->nombre,
-                    'paterno' => $obj->paterno,
-                    'materno' => $obj->materno,
-                    'correo' => $obj->correo,
-                    'password' => $newPass,
+    // Validamos que no se repita el correo
+    $correo = $pdo->prepare("SELECT CORREO FROM `asesor` WHERE CORREO=:correo");
+    $correo->execute([
+        'correo' => $obj->correo,
     ]);
 
-    // Verificamos si se agrego correctamente
-    if($response){
-        echo "¡Usuario agregado EXITOSAMENTE!"."<br>";
+    if ($correo->rowCount() > 1){
+
+        echo "Ya existe un usuario con ese correo";
+
     } else {
-        echo "ERROR: Ocurrio un error al insertar nuevo usuario"."<br>";
+
+        // Hasheamos la password
+        $newPass = password_hash($obj->password, PASSWORD_DEFAULT, ['cost' => 13]);
+        //echo $newPass;
+
+        // Creamos consulta
+        $user = $pdo->prepare("INSERT INTO `asesor` (`ID_ASESOR`, `NOMBRE`, `PATERNO`, `MATERNO`, `CORREO`, `PASSWORD`) VALUES (NULL, :nombre, :paterno, :materno, :correo, :password)");
+
+        // Llenamos campos y ejecutamos
+        $response = $user->execute([
+            'nombre' => $obj->nombre,
+            'paterno' => $obj->paterno,
+            'materno' => $obj->materno,
+            'correo' => $obj->correo,
+            'password' => $newPass,
+        ]);
+
+        // Verificamos si se agrego correctamente
+        if($response){
+            echo "¡Usuario agregado EXITOSAMENTE!";
+        } else {
+            echo "ERROR: Ocurrio un error al insertar nuevo usuario";
+        }
+
     }
 
 }
-
