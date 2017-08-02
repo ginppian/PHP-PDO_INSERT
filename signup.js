@@ -21,6 +21,10 @@ $(document).on("click", "#button", function(){
                     success: function(result){
 
                         alert(result);
+
+                        // Limpiamos el formulario
+                        $("#form").find("input,textarea").val('');
+
                     },
                     error: function(e){
                         console.log(e.message);
@@ -100,4 +104,14 @@ function getFormInJSON(){
     obj["password"] = getPassword();
 
     return obj;
+}
+
+function clearForm(){
+
+    $("#nombre").val('asdf');
+    $("#paterno").val('');
+    $("#materno").val('');
+    $("#correo").val('');
+    $("#password").val('');
+    $("#verifyPassword").val('');
 }
